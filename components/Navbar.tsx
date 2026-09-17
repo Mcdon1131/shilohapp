@@ -1,4 +1,3 @@
-"use client";
 
 import AnouncementBar from "./AnouncementBar";
 import NavbarComponent from "./NavbarComponent";
