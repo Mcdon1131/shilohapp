@@ -28,7 +28,7 @@ const NavDropdown = ({
         exit={{ opacity: 0 }}
         transition={{ duration: 0.15 }}
         style={{ display: show ? "flex" : "none" }}
-        className="absolute left-0 right-0 bottom-0 transform translate-y-2/2 bg-black/50 h-[65vh] text-white"
+        className="navDropdown absolute left-0 right-0 bottom-0 transform translate-y-2/2 bg-white h-[65vh] text-black"
       >
         {currentPointer}
       </motion.div>
