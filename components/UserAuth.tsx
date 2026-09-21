@@ -1,19 +1,25 @@
 "use client";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
+
 import InputField from "./InputField";
 
 interface UserAuthProps {
   show: boolean;
+  id: string;
+  userAuthRef: React.RefObject<HTMLDivElement | null>;
   onClose?: () => void;
   onClick?: (component: string) => void;
 }
 
-const UserAuth = ({ show, onClick, onClose }: UserAuthProps) => {
+const UserAuth = ({ show, id, onClick, onClose, userAuthRef }: UserAuthProps) => {
+
   return (
     <AnimatePresence>
       {show && (
         <motion.div
+          ref={userAuthRef}
+          id={id}
           onClick={(e) => {
             e.stopPropagation();
             onClick?.("userAuth");

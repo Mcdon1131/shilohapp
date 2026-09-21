@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, MouseEvent } from "react";
 import { useScroll, useMotionValueEvent } from "motion/react";
 
 import Link from "next/link";
@@ -15,6 +15,7 @@ const NavbarComponent = () => {
   const [isNavHovered, setIsNavHovered] = useState<boolean>(false);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const userAuthRef = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll();
   const [scrolled, setIsScrolled] = useState(false);
@@ -48,8 +49,27 @@ const NavbarComponent = () => {
   };
 
   useEffect(() => {
-    const handleClick = () => {
-      if (pointer !== "") setPointer("");
+    const handleClick = (e: MouseEvent) => {
+      if (!(e.target instanceof Node)) {
+        return;
+      }
+
+      const dropdown = document.getElementById("nav-dropdown");
+
+      if (dropdown?.contains(e.target)) {
+        return;
+      }
+
+      if (userAuthRef.current?.contains(e.target)) {
+        return;
+      }
+
+      if (pointer === "shop" || pointer === "about") {
+        setShowDropdownNav(false);
+      }
+      if (pointer === "userAuth") {
+        setPointer("");
+      }
     };
     window.addEventListener("click", handleClick);
     return () => window.removeEventListener("click", handleClick);
@@ -220,7 +240,11 @@ const NavbarComponent = () => {
         }}
         onMouseLeave={handleMouseLeave}
       />
-      <UserAuth show={pointer === "userAuth"} onClose={() => setPointer("")} />
+      <UserAuth
+        id={"user-auth"}
+        show={pointer === "userAuth"}
+        onClose={() => setPointer("")}
+      />
     </div>
   );
 };
