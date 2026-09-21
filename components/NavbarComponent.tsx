@@ -7,6 +7,7 @@ import Link from "next/link";
 import Hover from "./Hover";
 import NavDropdown from "./NavDropdown";
 import UserAuth from "./UserAuth";
+import Cart from "./Cart";
 
 const NavbarComponent = () => {
   const [showDropdownNav, setShowDropdownNav] = useState<boolean>(false);
@@ -15,7 +16,8 @@ const NavbarComponent = () => {
   const [isNavHovered, setIsNavHovered] = useState<boolean>(false);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const userAuthRef = useRef<HTMLDivElement>(null);
+  const userAuthRef = useRef<HTMLDivElement | null>(null);
+  const userCartRef = useRef<HTMLDivElement | null>(null);
 
   const { scrollY } = useScroll();
   const [scrolled, setIsScrolled] = useState(false);
@@ -244,6 +246,14 @@ const NavbarComponent = () => {
         id={"user-auth"}
         show={pointer === "userAuth"}
         onClose={() => setPointer("")}
+        userAuthRef={userAuthRef}
+      />
+      <Cart
+        id={"cart"}
+        show={pointer === "cart"}
+        onClose={() => setPointer("")}
+        cartRef={userCartRef}
+        onMouseEnter={() => setIsNavHovered(false)}
       />
     </div>
   );

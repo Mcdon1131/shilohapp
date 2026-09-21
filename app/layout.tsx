@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Geist, Geist_Mono, Figtree, Poppins } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Figtree,
+  Poppins,
+  Nanum_Myeongjo,
+} from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,6 +26,11 @@ const figtree = Figtree({
   subsets: ["latin"],
 });
 
+const nanum = Nanum_Myeongjo({
+  variable: "--font-nanum",
+  subsets: ["latin"],
+  weight: ["400", "700", "800"],
+});
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -35,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${figtree.variable} ${nanum.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar />

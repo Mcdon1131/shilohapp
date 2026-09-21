@@ -12,6 +12,7 @@
   --color-primary-text: var(--primary-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-nanum: var(--font-nanum), sans-serif;
   --font-figtree: var(--font-figtree), sans-serif;
   --font-poppins: var(--font-poppins), sans-serif;
 }
