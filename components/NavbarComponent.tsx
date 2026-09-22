@@ -41,7 +41,9 @@ const NavbarComponent = () => {
       return setPointer("");
     }
     setPointer(name);
-    console.log(pointer);
+    if (name === "search") {
+      setShowDropdownNav((prev) => !prev);
+    }
   };
 
   const handleMouseLeave = () => {
@@ -156,7 +158,11 @@ const NavbarComponent = () => {
         </h1>
       </div>
       <div className="flex-1 text-current flex items-center justify-end gap-6 pr-2">
-        <button className="text-current">
+        <button
+          id={"search"}
+          onClick={() => handleMouseClick("search")}
+          className="text-current "
+        >
           <span>
             <svg
               viewBox="0 0 20 20"

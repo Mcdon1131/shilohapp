@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import ShopNavDropdown from "./ShopNavDropdown";
 import AboutNavbarDropdown from "./AboutNavbarDropdown";
+import SearchComponent from "./SearchComponent";
 
 interface NavDropdownProps {
   show: boolean;
@@ -33,15 +34,15 @@ const NavDropdown = ({
           className="flex px-5 absolute left-0 right-0 bottom-0 transform translate-y-2/2 bg-white h-[65vh]  text-primary-text"
         >
           <div className="py-5 w-full">
-           
-              {currentPointer === "shop" ? (
-                <ShopNavDropdown />
-              ) : currentPointer === "about" ? (
-                <AboutNavbarDropdown />
-              ) : (
-                ""
-              )}
-           
+            {currentPointer === "shop" ? (
+              <ShopNavDropdown />
+            ) : currentPointer === "about" ? (
+              <AboutNavbarDropdown />
+            ) : currentPointer === "search" ? (
+              <SearchComponent />
+            ) : (
+              ""
+            )}
           </div>
         </motion.div>
       )}
