@@ -11,6 +11,7 @@ interface NavDropdownProps {
   id: string;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
+  onClose: () => void;
 }
 const NavDropdown = ({
   show,
@@ -18,6 +19,7 @@ const NavDropdown = ({
   id,
   onMouseEnter,
   onMouseLeave,
+  onClose
 }: NavDropdownProps) => {
   return (
     <AnimatePresence mode="wait">
@@ -31,15 +33,17 @@ const NavDropdown = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.15 } }}
           transition={{ duration: 0.15 }}
-          className="flex px-5 absolute left-0 right-0 bottom-0 transform translate-y-2/2 bg-white h-[65vh]  text-primary-text"
+          className={`flex ${currentPointer === "search" ? "" : "px-5"} absolute left-0 right-0 bottom-0 transform translate-y-full bg-white h-[65vh]  text-primary-text`}
         >
-          <div className="py-5 w-full">
+          <div
+            className={`${currentPointer === "search" ? "" : "py-5"} w-full`}
+          >
             {currentPointer === "shop" ? (
               <ShopNavDropdown />
             ) : currentPointer === "about" ? (
               <AboutNavbarDropdown />
             ) : currentPointer === "search" ? (
-              <SearchComponent />
+              <SearchComponent onClose={onClose}/>
             ) : (
               ""
             )}

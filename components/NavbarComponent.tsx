@@ -8,6 +8,7 @@ import Hover from "./Hover";
 import NavDropdown from "./NavDropdown";
 import UserAuth from "./UserAuth";
 import Cart from "./Cart";
+import SideBar from "./Sidebar";
 
 const NavbarComponent = () => {
   const [showDropdownNav, setShowDropdownNav] = useState<boolean>(false);
@@ -28,6 +29,10 @@ const NavbarComponent = () => {
       setIsScrolled(false);
     }
   });
+
+  const handleOnClose = () => {
+    setShowDropdownNav(false);
+  };
 
   const handleMouseEnter = (name: string) => {
     clearTimeout(timeoutRef.current);
@@ -50,6 +55,14 @@ const NavbarComponent = () => {
     timeoutRef.current = setTimeout(() => {
       setShowDropdownNav(false);
     }, 1000);
+  };
+
+  const handleSidebarClick = () => {
+    if (showDropdownNav) {
+      setShowDropdownNav(false);
+    }
+    setPointer("sidebar");
+    console.log(pointer);
   };
 
   useEffect(() => {
@@ -113,7 +126,11 @@ const NavbarComponent = () => {
             </Link>
           </Hover>
         </span>
-        <button className="text-current lg:hidden block w-8 ">
+        <button
+          id="sidebar-btn"
+          onClick={handleSidebarClick}
+          className="text-current lg:hidden block w-8 "
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-full h-full"
@@ -183,6 +200,9 @@ const NavbarComponent = () => {
         </button>
         <button
           onClick={() => {
+            if (showDropdownNav) {
+              setShowDropdownNav(false);
+            }
             handleMouseClick("cart");
           }}
           className="text-current "
@@ -243,6 +263,7 @@ const NavbarComponent = () => {
         id={"nav-dropdown"}
         show={showDropdownNav}
         currentPointer={pointer}
+        onClose={handleOnClose}
         onMouseEnter={() => {
           clearTimeout(timeoutRef.current);
         }}
@@ -260,6 +281,11 @@ const NavbarComponent = () => {
         onClose={() => setPointer("")}
         cartRef={userCartRef}
         onMouseEnter={() => setIsNavHovered(false)}
+      />
+      <SideBar
+        id={"sidebar"}
+        show={pointer === "sidebar"}
+        onClose={() => setPointer("")}
       />
     </div>
   );

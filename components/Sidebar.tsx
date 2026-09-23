@@ -4,13 +4,12 @@ interface SideBarProps {
   id: string;
   onClose: () => void;
   show: boolean;
-  onMouseEnter: () => void;
 }
 
 import { AnimatePresence, motion } from "motion/react";
 import { useRef } from "react";
 
-const SideBar = ({ sidebarRef, id, onClose, show, onMouseEnter }: SideBarProps) => {
+const SideBar = ({ sidebarRef, id, onClose, show }: SideBarProps) => {
   const sideBarContainer = useRef<HTMLDivElement | null>(null);
 
   const HandleOnMouseClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -32,7 +31,6 @@ const SideBar = ({ sidebarRef, id, onClose, show, onMouseEnter }: SideBarProps) 
           key={id}
           ref={sidebarRef}
           className="bg-[rgba(230,230,230,0.7)] fixed inset-0"
-          onMouseEnter={onMouseEnter}
         >
           <motion.div
             ref={sideBarContainer}
@@ -40,12 +38,10 @@ const SideBar = ({ sidebarRef, id, onClose, show, onMouseEnter }: SideBarProps) 
             animate={{ x: 0 }}
             transition={{ duration: 0.25 }}
             exit={{ x: "-100%" }}
-            className="bg-[rgb(237_236_234)] absolute flex flex-col h-dvh w-[90%] max-w-112.5 right-0"
+            className="bg-[rgb(237_236_234)] absolute flex flex-col h-dvh w-[90%] max-w-112.5 left-0"
           >
             <header className="flex justify-between py-4 px-3 relative">
-              <h3 className="text-primary-text text-2xl font-nanum">
-                Cart (0)
-              </h3>
+              <div></div>
               <button className="mr-2" onClick={() => onClose()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -77,16 +73,7 @@ const SideBar = ({ sidebarRef, id, onClose, show, onMouseEnter }: SideBarProps) 
               </button>
               <span className="absolute bottom-0 w-[95%] left-[50%] -translate-x-1/2 border-b border-gray-400"></span>
             </header>
-            <section className=" flex-1 flex items-center justify-center relative">
-              <div className="absolute max-sm:top-[35%] max-sm:translate-y-[-35%]">
-                <p className="mb-7 text-primary-text font-figtree">
-                  Your cart is currently empty
-                </p>
-                <button className="block font-figtree text-[14px] rounded-px bg-[#E68819] mx-auto w-[95%] py-2.5  ">
-                  ALL PRODUCTS
-                </button>
-              </div>
-            </section>
+            <section className=" flex-1 flex items-center justify-center relative"></section>
           </motion.div>
         </motion.div>
       )}
